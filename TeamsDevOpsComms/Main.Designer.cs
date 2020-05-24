@@ -73,7 +73,7 @@
             this.GetTeamsBtn.Name = "GetTeamsBtn";
             this.GetTeamsBtn.Size = new System.Drawing.Size(101, 36);
             this.GetTeamsBtn.TabIndex = 3;
-            this.GetTeamsBtn.Text = "Get Teams...";
+            this.GetTeamsBtn.Text = "List Teams";
             this.GetTeamsBtn.UseVisualStyleBackColor = true;
             this.GetTeamsBtn.Click += new System.EventHandler(this.GetTeamsBtn_Click);
             // 
