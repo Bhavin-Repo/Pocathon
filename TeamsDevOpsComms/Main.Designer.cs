@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.cmdSignOn = new System.Windows.Forms.Button();
             this.ResponseText = new System.Windows.Forms.TextBox();
             this.TokenDetails = new System.Windows.Forms.TextBox();
@@ -115,6 +116,7 @@
             this.Controls.Add(this.TokenDetails);
             this.Controls.Add(this.ResponseText);
             this.Controls.Add(this.cmdSignOn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main";
             this.Text = "Teams -> DevOps";
