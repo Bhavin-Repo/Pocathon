@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using Microsoft.Identity.Client;
 using Microsoft.Graph;
 using Microsoft.Graph.Auth;
+using TeamsDevOpsComms.Model;
+
 namespace TeamsDevOpsComms
 {
     public partial class Main : Form
