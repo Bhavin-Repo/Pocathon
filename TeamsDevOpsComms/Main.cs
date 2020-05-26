@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Identity.Client;
 using Microsoft.Graph;
 using Microsoft.Graph.Auth;
-using TeamsDevOpsComms.Model;
+using TeamsDevOpsComms.Utilities;
+using TestConginitiveService_TextAnalytics;
 
 namespace TeamsDevOpsComms
 {
@@ -166,15 +165,42 @@ namespace TeamsDevOpsComms
             foreach (var m in messages)
             {
                 ResponseText.Text += m.From.User.DisplayName + " wrote:" + Environment.NewLine;
-                ResponseText.Text += m.Body.Content + Environment.NewLine;
+                ResponseText.Text += Helper.ConvertHtmlToPlainText(m.Body.Content) + Environment.NewLine;
                 foreach(var r in m.Replies)
                 {
                     ResponseText.Text += "\t" + r.From.User.DisplayName + " replied:" + Environment.NewLine;
-                    ResponseText.Text += "\t" + r.Body.Content + Environment.NewLine;
+                    ResponseText.Text += "\t" + Helper.ConvertHtmlToPlainText(r.Body.Content) + Environment.NewLine;
                     ResponseText.Text += Environment.NewLine;
                 }
                 ResponseText.Text += Environment.NewLine;
             }
+        }
+
+        private void GetIncidentAndCreateTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #region CognitiveServices
+
+        #endregion CognitiveServices
+
+        private async void btnSendText_Click(object sender, EventArgs e)
+        {
+            var id = "1";
+            string text = InputBox.Text;
+            if (!String.IsNullOrEmpty(text))
+            {
+                OutputBox.Text = "------Sentiment Analysis----------" + Environment.NewLine;
+                 var sentimentTask = await SentimentAnalyser.AnalyzeSentimentAsync(id, text, "en");
+                OutputBox.Text += sentimentTask + Environment.NewLine;
+                OutputBox.Text += "------KeyPhrase Analysis----------" + Environment.NewLine;
+                var keyphraseTask = await KeyPhraseAnalyser.AnalyzeKeyPhrases(id, text, "en");
+                OutputBox.Text += keyphraseTask + Environment.NewLine;
+            }
+            else
+                OutputBox.Text = "Please enter some text to analyse";
+                
         }
     }
 }
