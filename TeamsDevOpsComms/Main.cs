@@ -164,7 +164,7 @@ namespace TeamsDevOpsComms
             ResponseText.Text = "";
             foreach (var m in messages)
             {
-                ResponseText.Text += m.From.User.DisplayName + " wrote:" + Environment.NewLine;
+                ResponseText.Text += m.From.User.DisplayName + " wrote:";
                 ResponseText.Text += Helper.ConvertHtmlToPlainText(m.Body.Content) + Environment.NewLine;
                 foreach(var r in m.Replies)
                 {

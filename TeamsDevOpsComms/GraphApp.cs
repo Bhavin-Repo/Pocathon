@@ -36,6 +36,9 @@ namespace TeamsDevOpsComms
         // want to change to the AadAuthorityAudience.
         public static string Tenant = "PatelzAndPatel.onmicrosoft.com";
 
+        //Capita tenant id
+       //public static string Tenant = "1edaad83-b2ef-483d-81f1-2c48682f40ec";
+
         private static IPublicClientApplication _clientApp;
 
         public static IPublicClientApplication PublicClientApp { get { return _clientApp; } }

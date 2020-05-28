@@ -10,7 +10,7 @@ namespace TeamsDevOpsComms.Utilities
    public static class Helper
     {
         /// <summary>
-        /// Removes all HTML tags from the strings
+        /// Removes all HTML tags from the strings including lines containing only white spaces.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -18,7 +18,8 @@ namespace TeamsDevOpsComms.Utilities
         {
             string result = "";
             Regex regex = new Regex("\\<[^\\>]*\\>");
-            result = regex.Replace(obj.ToString(), String.Empty);
+            result = Regex.Replace((regex.Replace(obj.ToString(), String.Empty).Replace("&nbsp;", String.Empty).Replace("&lt;", String.Empty).Replace("&gt", string.Empty).Replace("amp;", String.Empty)),
+                    @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
             return result;
         }
     }
