@@ -5,6 +5,15 @@ using Microsoft.Graph;
 using Microsoft.Graph.Auth;
 using TeamsDevOpsComms.Utilities;
 using TestConginitiveService_TextAnalytics;
+using Microsoft.VisualStudio.Services.WebApi;
+using Microsoft.VisualStudio.Services.WebApi.Patch;
+using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
+using Microsoft.VisualStudio.Services.Common;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TeamsDevOpsComms
 {
@@ -12,7 +21,7 @@ namespace TeamsDevOpsComms
     {
         //Set the scope for API call to user.read
         string[] scopes = new string[] { "user.read", "group.readwrite.all" , "Team.ReadBasic.All", "Group.ReadWrite.All" };
-
+        
         IPublicClientApplication publicClientApplication = null;
         InteractiveAuthenticationProvider graphAuthResult = null;
         GraphServiceClient graphClient = null;
@@ -178,7 +187,9 @@ namespace TeamsDevOpsComms
 
         private void GetIncidentAndCreateTask_Click(object sender, EventArgs e)
         {
-
+            VssConnection connection = ConnectToAdo();
+            if(txtTaskName.Text.Length > 0)
+                CreateWorkItem(connection,txtTaskName.Text).Wait();           
         }
 
         #region CognitiveServices
@@ -201,6 +212,40 @@ namespace TeamsDevOpsComms
             else
                 OutputBox.Text = "Please enter some text to analyse";
                 
+        }
+
+        private VssConnection ConnectToAdo()
+        {
+            VssConnection connection = new VssConnection(ConnectionInfo._uri, new VssBasicCredential(string.Empty, ConnectionInfo._personalAccessToken));
+            return connection;
+        }
+
+        static private async Task CreateWorkItem(VssConnection connection, string TaskName)
+        {
+            
+            JsonPatchDocument document = new JsonPatchDocument();
+            document.Add
+             (
+                    new JsonPatchOperation()
+                    {
+                        Operation = Microsoft.VisualStudio.Services.WebApi.Patch.Operation.Add,
+                        Path = "/fields/System.Title",
+                        Value = TaskName
+                    }
+             );
+
+            WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
+
+            try
+            {
+                WorkItem result = witClient.CreateWorkItemAsync(document, ConnectionInfo._projectGuid, "Task").Result;
+                MessageBox.Show("Task Successfully Created: " + TaskName);
+            }
+
+            catch (AggregateException ex)
+            {
+                MessageBox.Show("Error creating Task: {0}", ex.InnerException.Message);
+            }
         }
     }
 }
