@@ -8,7 +8,7 @@ using TeamsDevOpsComms.Model;
 
 namespace TeamsDevOpsComms.Utilities
 {
-   public static class Helper
+    public static class Helper
     {
         /// <summary>
         /// Removes all HTML tags from the strings including lines containing only white spaces.
@@ -41,7 +41,7 @@ namespace TeamsDevOpsComms.Utilities
                     adoItem.Priority = wordList[i].ToUpper();
                 }
 
-                switch (wordList[i].Trim())
+                switch (wordList[i].Substring(0, 3).Trim())
                 {
                     case "SR":
                         adoItem.Type = type.SR;
@@ -55,7 +55,7 @@ namespace TeamsDevOpsComms.Utilities
                     case "O":
                         adoItem.Type = type.O;
                         break;
-                    case "incident":
+                    case "in":
                         adoItem.Type = type.incident;
                         break;
                 }
@@ -80,5 +80,6 @@ namespace TeamsDevOpsComms.Utilities
 
             return adoItem;
         }
+    
     }
 }
