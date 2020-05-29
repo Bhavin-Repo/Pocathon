@@ -5,6 +5,8 @@ using Microsoft.Graph;
 using Microsoft.Graph.Auth;
 using TeamsDevOpsComms.Utilities;
 using TestConginitiveService_TextAnalytics;
+using System.Drawing;
+using System.Linq;
 
 namespace TeamsDevOpsComms
 {
@@ -89,6 +91,8 @@ namespace TeamsDevOpsComms
         {
             StatusLabel.Text = status;
         }
+
+        #region TeamsDeatailView
 
         private async void GetTeamsBtn_Click(object sender, EventArgs e)
         {
@@ -176,14 +180,34 @@ namespace TeamsDevOpsComms
             }
         }
 
-        private void GetIncidentAndCreateTask_Click(object sender, EventArgs e)
+        #endregion TeamsDeatailView
+
+        #region TemasAdoAutomation
+
+        private async void GetIncidentAndCreateTask_Click(object sender, EventArgs e)
         {
 
+            var messages = await graphClient.Teams["767cdaf4-4105-45dd-88b9-eefc110cf3d1"].Channels["19:79cba57fffb547dbb4632415d963f2a3@thread.tacv2"].Messages
+                               .Request()
+                               .GetAsync();
+            var result = messages.Where(x => x.Body.Content.Contains("Replicated")).FirstOrDefault();
+
+            incedentTextBox.Text += "Message id : ";
+            incedentTextBox.Text += result.Id + Environment.NewLine;
+            incedentTextBox.Text += result.From.User.DisplayName + " wrote:";
+            var content = Helper.ConvertHtmlToPlainText(result.Body.Content) + Environment.NewLine;
+            incedentTextBox.Text += content;
+            CreateAdoTask(content);
         }
 
-        #region CognitiveServices
+       public void  CreateAdoTask(string content)
+        {
+            var adoItem = Helper.GetADOItemDetails(content);
+        }
+        #endregion TemasAdoAutomation
 
-        #endregion CognitiveServices
+
+        #region CognitiveServices
 
         private async void btnSendText_Click(object sender, EventArgs e)
         {
@@ -202,5 +226,6 @@ namespace TeamsDevOpsComms
                 OutputBox.Text = "Please enter some text to analyse";
                 
         }
+        #endregion CognitiveServices
     }
 }

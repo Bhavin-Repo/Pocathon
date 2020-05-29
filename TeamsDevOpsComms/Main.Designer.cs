@@ -41,12 +41,16 @@ namespace TeamsDevOpsComms
             this.GetTeamsBtn = new System.Windows.Forms.Button();
             this.ResponseText = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.incedentTextBox = new System.Windows.Forms.TextBox();
             this.GetIncidentAndCreateTask = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.InputBox = new System.Windows.Forms.TextBox();
-            this.btnSendText = new System.Windows.Forms.Button();
             this.OutputBox = new System.Windows.Forms.TextBox();
+            this.btnSendText = new System.Windows.Forms.Button();
+            this.InputBox = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AdoTaskTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -148,6 +152,10 @@ namespace TeamsDevOpsComms
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.RosyBrown;
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.AdoTaskTextBox);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.incedentTextBox);
             this.tabPage2.Controls.Add(this.GetIncidentAndCreateTask);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
@@ -155,6 +163,15 @@ namespace TeamsDevOpsComms
             this.tabPage2.Size = new System.Drawing.Size(710, 373);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "TeamsADOAutomation";
+            // 
+            // incedentTextBox
+            // 
+            this.incedentTextBox.Location = new System.Drawing.Point(80, 92);
+            this.incedentTextBox.Multiline = true;
+            this.incedentTextBox.Name = "incedentTextBox";
+            this.incedentTextBox.ReadOnly = true;
+            this.incedentTextBox.Size = new System.Drawing.Size(622, 191);
+            this.incedentTextBox.TabIndex = 1;
             // 
             // GetIncidentAndCreateTask
             // 
@@ -179,13 +196,13 @@ namespace TeamsDevOpsComms
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "CognitiveServices";
             // 
-            // InputBox
+            // OutputBox
             // 
-            this.InputBox.Location = new System.Drawing.Point(19, 58);
-            this.InputBox.Multiline = true;
-            this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(456, 103);
-            this.InputBox.TabIndex = 0;
+            this.OutputBox.Location = new System.Drawing.Point(19, 195);
+            this.OutputBox.Multiline = true;
+            this.OutputBox.Name = "OutputBox";
+            this.OutputBox.Size = new System.Drawing.Size(667, 159);
+            this.OutputBox.TabIndex = 2;
             // 
             // btnSendText
             // 
@@ -197,13 +214,40 @@ namespace TeamsDevOpsComms
             this.btnSendText.UseVisualStyleBackColor = true;
             this.btnSendText.Click += new System.EventHandler(this.btnSendText_Click);
             // 
-            // OutputBox
+            // InputBox
             // 
-            this.OutputBox.Location = new System.Drawing.Point(19, 195);
-            this.OutputBox.Multiline = true;
-            this.OutputBox.Name = "OutputBox";
-            this.OutputBox.Size = new System.Drawing.Size(667, 159);
-            this.OutputBox.TabIndex = 2;
+            this.InputBox.Location = new System.Drawing.Point(19, 58);
+            this.InputBox.Multiline = true;
+            this.InputBox.Name = "InputBox";
+            this.InputBox.Size = new System.Drawing.Size(456, 103);
+            this.InputBox.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 157);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "INCIDENT";
+            // 
+            // AdoTaskTextBox
+            // 
+            this.AdoTaskTextBox.Location = new System.Drawing.Point(81, 309);
+            this.AdoTaskTextBox.Multiline = true;
+            this.AdoTaskTextBox.Name = "AdoTaskTextBox";
+            this.AdoTaskTextBox.ReadOnly = true;
+            this.AdoTaskTextBox.Size = new System.Drawing.Size(621, 37);
+            this.AdoTaskTextBox.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(-3, 309);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "ADO TASK";
             // 
             // Main
             // 
@@ -222,6 +266,7 @@ namespace TeamsDevOpsComms
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -247,6 +292,10 @@ namespace TeamsDevOpsComms
         private Button btnSendText;
         private TextBox InputBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private TextBox incedentTextBox;
+        private Label label2;
+        private TextBox AdoTaskTextBox;
+        private Label label1;
     }
 }
 
